@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
     "@mui/material": "^5.14.14",
+    "@react-oauth/google": "^0.11.1",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.1",
     "gapi-script": "^1.2.0",

@@ -1,10 +1,6 @@
-import { getUserAuthData } from '@/entities/User'
-import { Suspense, memo, useCallback, useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import { Suspense, memo, useCallback } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import {
-    routeConfig,
-} from '../routeConfig/routeConfig'
+import { routeConfig } from '../routeConfig/routeConfig'
 import { PageLoader } from '@/widgets/PageLoader'
 import { RequireAuth } from './RequireAuth'
 import { AppRouteProps } from '@/shared/types/router'
@@ -14,11 +10,10 @@ export const AppRouter = memo(() => {
         (route: AppRouteProps) => {
             const element = (
                 <Suspense fallback={<PageLoader />}>
-                        {route.element}
+                    {route.element}
                 </Suspense>
             )
 
-            
             return (
                 <Route
                     element={

@@ -1,24 +1,31 @@
-import { GoogleClientUrl } from '@/shared/consts/GoogleClientUrl'
-import { LoginButton } from '@/widgets/GoogleLogin/ui/LoginButton'
-import { gapi } from 'gapi-script'
-import { useEffect } from 'react'
+import { initAuthData } from '@/entities/User'
+import { cn } from '@/shared/lib/classNames'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { useAppSelector } from '@/shared/lib/hooks/useAppSelector/useAppSelector'
+import { PageLoader } from '@/widgets/PageLoader'
+import { Suspense, useEffect } from 'react'
+import { AppRouter } from './providers/router'
 
 function App() {
-    useEffect(() => {
-        const start = () => {
-            gapi.client.init({
-                clientId: GoogleClientUrl,
-                scope: '',
-            })
-        }
+    const dispatch = useAppDispatch()
+    const _inited = useAppSelector(
+        (state) => state.user._inited
+    )
 
-        gapi.load('client:auth2', start)
-    }, [])
+    useEffect(() => {
+        dispatch(initAuthData())
+    }, [dispatch])
+
+    if (!_inited) {
+        return <PageLoader />
+    }
 
     return (
-        <>
-            <LoginButton />
-        </>
+        <div className={cn('app', {}, [])}>
+            <Suspense fallback={<PageLoader />}>
+                {_inited && <AppRouter />}
+            </Suspense>
+        </div>
     )
 }
 

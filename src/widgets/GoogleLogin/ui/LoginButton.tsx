@@ -1,10 +1,6 @@
 import { GoogleClientUrl } from '@/shared/consts/GoogleClientUrl'
+import { GoogleLogin, GoogleLoginResponse,  GoogleLoginResponseOffline } from '@reac'
 import { useCallback } from 'react'
-import {
-    GoogleLogin,
-    GoogleLoginResponse,
-    GoogleLoginResponseOffline, 
-} from 'react-google-login'
 
 const isOnline = (res: any): res is GoogleLoginResponse => {
     return res.googleId

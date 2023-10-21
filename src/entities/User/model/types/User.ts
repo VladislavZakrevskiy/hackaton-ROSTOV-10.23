@@ -7,6 +7,7 @@ export interface User {
 	avatar?: string;
 	roles?: UserRoles[];
 	jsonSettings?: jsonSettings;
+	avatarSrc?: string
 }
 
 export interface UserSchema {
