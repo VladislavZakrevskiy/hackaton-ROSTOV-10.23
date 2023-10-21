@@ -1,2 +1,2 @@
-export { SpecialistCard } from './ui/SpecialistCard'
-export { SpecialistTextCard } from './ui/SpecialistTextCard'
+export { Specialist } from './ui/Specialist/Specialist';
+export { SpecialistSchema } from './model/types/SpecialistSchema';
