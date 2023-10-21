@@ -1,67 +1,22 @@
-import { Paper, Typography } from "@mui/material/";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import { Container, Typography } from "@mui/material";
+import { MeetingImage, MeetingImageProps } from "./MeetingImage";
+import { FC } from "react";
 
-type MeetingCardProps = {
-	name: string;
-	date: string;
-	imageUrl: string;
-	height: string;
-	width: string;
-};
+interface MeetingCardProps extends MeetingImageProps {
+	title: string;
+	place: string;
+}
 
-export const MeetingCard: React.FC<MeetingCardProps> = ({ name, date, imageUrl, height, width }) => {
+export const MeetingCard: FC<MeetingCardProps> = ({ title, place, ...meetingImageProps }) => {
 	return (
-		<div>
-			<Paper
-				sx={{
-					width: width,
-					height: height,
-					backgroundImage: `url(${imageUrl})`,
-					backgroundSize: "cover",
-					backgroundRepeat: "no-repeat",
-					borderRadius: "12px",
-					display: "flex",
-					alignItems: "center",
-				}}
-			>
-				<Paper
-					sx={{
-						minWidth: "10%",
-						padding: "10px 13px",
-						height: "10%",
-						borderRadius: "10px",
-						alignSelf: "end",
-						backgroundColor: "#fff",
-						marginBottom: "0.8rem",
-						marginLeft: "0.6rem",
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "flex-start",
-						border: "none",
-						gap: 1,
-					}}
-				>
-					<CalendarTodayIcon
-						sx={{
-							mb: 0.25,
-							width: "10%",
-						}}
-					/>
-					<Typography color={"#4d5259"} fontWeight={100} fontSize={16}>
-						{date}
-					</Typography>
-				</Paper>
-			</Paper>
-			<Typography
-				fontSize={24}
-				fontWeight={300}
-				sx={{
-					marginTop: "0.5rem",
-					color: "#4d5259",
-				}}
-			>
-				{name}
+		<Container>
+			<MeetingImage {...meetingImageProps} />
+			<Typography mt={1} fontSize={24}>
+				{title}
 			</Typography>
-		</div>
+			<Typography fontSize={16} color={"GrayText"}>
+				{place}
+			</Typography>
+		</Container>
 	);
 };
