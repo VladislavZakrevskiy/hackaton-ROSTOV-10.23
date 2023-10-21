@@ -1,2 +1,2 @@
-export { Event } from './ui/Event/Event';
-export { EventSchema } from './model/types/EventSchema';
+export { EventCard } from './ui/EventCard';
+export type { EventSchema } from './model/types/EventSchema';

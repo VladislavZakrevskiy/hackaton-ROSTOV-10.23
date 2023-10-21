@@ -1,16 +1,16 @@
 import { Container, Typography } from "@mui/material";
-import { MeetingImage, MeetingImageProps } from "./MeetingImage";
+import { EventImage, EventImageProps } from "./EventImage";
 import { FC } from "react";
 
-interface MeetingCardProps extends MeetingImageProps {
+interface MeetingCardProps extends EventImageProps {
 	title: string;
 	place: string;
 }
 
-export const MeetingCard: FC<MeetingCardProps> = ({ title, place, ...meetingImageProps }) => {
+export const EventCard: FC<MeetingCardProps> = ({ title, place, ...EventImageProps }) => {
 	return (
 		<Container>
-			<MeetingImage {...meetingImageProps} />
+			<EventImage {...EventImageProps} />
 			<Typography mt={1} fontSize={24}>
 				{title}
 			</Typography>

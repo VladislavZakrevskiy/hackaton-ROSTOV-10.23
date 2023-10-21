@@ -1,14 +1,14 @@
 import { Paper, Typography } from "@mui/material/";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
-export type MeetingImageProps = {
+export type EventImageProps = {
 	date: string;
 	imageUrl: string;
 	height: string;
 	width: string;
 };
 
-export const MeetingImage: React.FC<MeetingImageProps> = ({ date, imageUrl, height, width }) => {
+export const EventImage: React.FC<EventImageProps> = ({ date, imageUrl, height, width }) => {
 	return (
 		<div>
 			<Paper

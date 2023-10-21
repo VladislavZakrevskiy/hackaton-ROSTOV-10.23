@@ -1,16 +1,24 @@
 import { UserRoles } from "../consts/UserRoles";
-import { jsonSettings } from "./jsonSettings";
 
 export interface User {
-	id: string;
-	username: string;
-	roles?: UserRoles[];
-	jsonSettings?: jsonSettings;
-	avatarSrc?: string
+	id: string
+	email: string
+	first_name: string
+	last_name: string
+	image_url: string
+	roles: string
+	comments?: Comment[]
+	notifications?: Notification[]
+	feedbacks?: FeedBack[]
+
+	created_at: string
+	updated_at: string
+	events: Event
 }
 
 export interface UserSchema {
+	errorEnter: boolean;
+	credential?: string;
 	authData?: User;
-
-	_inited: boolean;
+	roles: UserRoles[];
 }

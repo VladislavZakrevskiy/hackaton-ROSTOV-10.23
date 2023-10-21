@@ -1,26 +1,32 @@
-import { initAuthData } from "@/entities/User";
 import { cn } from "@/shared/lib/classNames";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector/useAppSelector";
 import { PageLoader } from "@/widgets/PageLoader";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { AppRouter } from "./providers/router";
+import { useGetMeQuery } from "@/entities/User/api/userApi";
+import { UserActions } from "@/entities/User";
 
 function App() {
+	const [inited, setInited] = useState(false);
+	const { data: user } = useGetMeQuery();
+	const credential = useAppSelector((state) => state.user.credential);
 	const dispatch = useAppDispatch();
-	const _inited = useAppSelector((state) => state.user._inited);
 
 	useEffect(() => {
-		dispatch(initAuthData());
-	}, [dispatch]);
+		if (user) {
+			dispatch(UserActions.setAuthData(user));
+		}
+		setInited(true);
+	}, [user, credential, dispatch]);
 
-	if (!_inited) {
+	if (!inited) {
 		return <PageLoader />;
 	}
 
 	return (
 		<div className={cn("app", {}, [])}>
-			<Suspense fallback={<PageLoader />}>{_inited && <AppRouter />}</Suspense>
+			<Suspense fallback={<PageLoader />}>{inited && <AppRouter />}</Suspense>
 		</div>
 	);
 }

@@ -1,40 +1,22 @@
-import { GoogleClientUrl } from '@/shared/consts/GoogleClientUrl'
-import { GoogleLogin, GoogleLoginResponse,  GoogleLoginResponseOffline } from '@reac'
-import { useCallback } from 'react'
-
-const isOnline = (res: any): res is GoogleLoginResponse => {
-    return res.googleId
-}
+import { UserActions } from "@/entities/User";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
+import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const LoginButton = () => {
-    const onSuccess = useCallback(
-        (
-            res:
-                | GoogleLoginResponse
-                | GoogleLoginResponseOffline
-        ) => {
-            if (isOnline(res)) {
-                console.log('success: ', res.profileObj)
-            }
-        },
-        []
-    )
+	const dispatch = useAppDispatch();
+	const nav = useNavigate();
 
-    const onFailure = useCallback(
-        (res: GoogleLoginResponse) => {
-            console.log('failure: ', res.profileObj)
-        },
-        []
-    )
+	const onSuccess = useCallback((res: CredentialResponse) => {
+		dispatch(UserActions.setCredential(res.credential || ""));
+		nav("/");
+	}, []);
 
-    return (
-        <GoogleLogin
-            clientId={GoogleClientUrl}
-            buttonText="Login"
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-            cookiePolicy="single_host_origin"
-            accessType="same-origin-allow-popupssame-origin"
-        />
-    )
-}
+	const onFailure = useCallback(() => {
+		dispatch(UserActions.setError());
+		console.log("failure");
+	}, []);
+
+	return <GoogleLogin onSuccess={onSuccess} onError={onFailure} />;
+};

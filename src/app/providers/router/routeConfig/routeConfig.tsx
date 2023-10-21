@@ -4,7 +4,6 @@ import {
 	AppRoutes,
 	getRouteAdmin,
 	getRouteEventById,
-	getRouteLogin,
 	getRouteMain,
 	getRouteNotFound,
 	getRouteProfile,
@@ -12,7 +11,6 @@ import {
 } from "@/shared/consts/router";
 import { AppRouteProps } from "@/shared/types/router";
 import { UserRoles } from "@/entities/User";
-import { LoginPage } from "@/pages/Login";
 import { RegistrationPage } from "@/pages/Registration";
 import { LazyProfiePage } from "@/pages/ProfilePage";
 import { LazyEventByIdPage } from "@/pages/EventByIdPage";
@@ -29,13 +27,10 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 		path: getRouteNotFound(),
 		element: <NotFoundPage />,
 	},
-	login: {
-		path: getRouteLogin(),
-		element: <LoginPage />,
-	},
 	registration: {
 		path: getRouteRegistration(),
 		element: <RegistrationPage />,
+		roles: [UserRoles.UNAUTH],
 	},
 	profile: {
 		path: getRouteProfile(),

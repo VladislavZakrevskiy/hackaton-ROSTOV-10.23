@@ -1,37 +1,16 @@
-import { rtkApi } from '@/shared/api/rtkApi'
-import { User } from '../model/types/User'
-import { jsonSettings } from '../model/types/jsonSettings'
+import { rtkApi } from "@/shared/api/rtkApi";
+import { User } from "..";
 
-interface setJsonSettingsProps {
-    userId: string
-    jsonSettings: jsonSettings
-}
-
+// TODO: добавить url для сенда
 const userApi = rtkApi.injectEndpoints({
-    endpoints: (build) => ({
-        setJsonSettings: build.mutation<
-            User,
-            setJsonSettingsProps
-        >({
-            query: ({ jsonSettings, userId }) => ({
-                url: '/users/' + userId,
-                method: 'PATCH',
-                body: {
-                    jsonSettings,
-                },
-            }),
-        }),
-        getJsonSettings: build.mutation<User, string>({
-            query: (userId) => ({
-                url: '/users/' + userId,
-                method: 'GET',
-            }),
-        }),
-    }),
-})
+	endpoints: (build) => ({
+		sendCreditial: build.mutation({
+			query: (creditial: string) => ({ url: "/", method: "", body: { creditial } }),
+		}),
+		getMe: build.query<User, void>({
+			query: () => "/me",
+		}),
+	}),
+});
 
-export const setJsonSettingsMutation =
-    userApi.endpoints.setJsonSettings.initiate
-
-export const getJsonSettingsMutation =
-    userApi.endpoints.getJsonSettings.initiate
+export const { useSendCreditialMutation, useGetMeQuery } = userApi;
