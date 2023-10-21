@@ -1,5 +1,4 @@
 import { Navbar } from '@/widgets/Navbar'
-import React from 'react'
 
 export const NotFoundPage = () => {
     return (
