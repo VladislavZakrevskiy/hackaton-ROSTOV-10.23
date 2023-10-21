@@ -5,11 +5,9 @@ import { useAppSelector } from '@/shared/lib/hooks/useAppSelector/useAppSelector
 import { PageLoader } from '@/widgets/PageLoader'
 import { Suspense, useEffect } from 'react'
 import { AppRouter } from './providers/router'
-import { GoogleClientUrl } from '@/shared/consts/GoogleClientUrl'
-import { gapi } from 'gapi-script'
-import { useEffect } from 'react'
-import { MeetingCard } from '@/entities/Meetings/MeetingCard'
-import { SpecialistCard } from '@/entities/SpecialistCard'
+import { MeetingCard } from '@/entities/Meetings'
+import { SpecialistCard } from '@/entities/Specialist'
+
 function App() {
     const dispatch = useAppDispatch()
     const _inited = useAppSelector(

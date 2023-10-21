@@ -1,7 +1,7 @@
-import { UserRoles, getUserAuthData, getUserRoles } from "@/entities/User";
+import { UserRoles } from "@/entities/User";
 import { getRouteMain, getRouteNotFound } from "@/shared/consts/router";
+import { useAppSelector } from "@/shared/lib/hooks/useAppSelector/useAppSelector";
 import { FC, ReactNode, useMemo } from "react";
-import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
 interface Props {
@@ -10,9 +10,9 @@ interface Props {
 }
 
 export const RequireAuth: FC<Props> = ({ children, roles }) => {
-	const auth = useSelector(getUserAuthData);
+	const auth = useAppSelector((state) => state.user.authData);
 	const location = useLocation();
-	const userRoles = useSelector(getUserRoles);
+	const userRoles = useAppSelector((state) => state.user.authData?.roles);
 
 	const hasRequiredRoles = useMemo(() => {
 		if (!roles) {

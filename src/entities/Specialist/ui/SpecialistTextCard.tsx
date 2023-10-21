@@ -17,9 +17,9 @@ interface SpeakerTextCardProps {
     speaker: Speaker
 }
 
-export const SpeakerTextCard: FC<SpeakerTextCardProps> = ({
-    speaker,
-}) => {
+export const SpecialistTextCard: FC<
+    SpeakerTextCardProps
+> = ({ speaker }) => {
     const { company, fullName, post, avatarSrc } = speaker
 
     return (
@@ -30,7 +30,7 @@ export const SpeakerTextCard: FC<SpeakerTextCardProps> = ({
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 5,
-                p: 2
+                p: 2,
             }}
         >
             <Stack>
