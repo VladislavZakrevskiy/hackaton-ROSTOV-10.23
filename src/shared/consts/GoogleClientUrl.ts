@@ -1,1 +1,1 @@
-export const GoogleClientUrl = '352150800763-hfla846oglr5nbr4br76um0aktrp795e.apps.googleusercontent.com'
+export const GoogleClientUrl = '506025918768-jek0ug56qoam9scjdk6ib2589qt0pc03.apps.googleusercontent.com'
