@@ -1,16 +1,17 @@
-import { User } from "@/entities/User"
+import { Specialist } from "@/entities/Specialist/model/types/Specialist";
+import { User } from "@/entities/User";
 
 export interface Feedback {
-    id: string          
-    score: number   
-    text: string 
-    event_id: string  
-    event: Event        
-    user_id: string       
-    user: User          
-    specialist_id: string 
-    specialist: Specialist    
-  
-    created_at: string 
-    updated_at: string 
+	id: string;
+	score: number;
+	text: string;
+	event_id: string;
+	event: Event;
+	user_id: string;
+	user: User;
+	specialist_id: string;
+	specialist: Specialist;
+
+	created_at: string;
+	updated_at: string;
 }

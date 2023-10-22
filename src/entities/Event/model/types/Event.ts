@@ -1,5 +1,6 @@
 import { Comment } from "@/entities/Comment/model/types/Comment"
 import { Feedback } from "@/entities/Comment/model/types/Feedback"
+import { Specialist } from "@/entities/Specialist/model/types/Specialist"
 import { User } from "@/entities/User"
 
 export interface Event {

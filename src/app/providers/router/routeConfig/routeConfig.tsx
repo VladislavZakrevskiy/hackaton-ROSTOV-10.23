@@ -8,6 +8,7 @@ import {
 	getRouteNotFound,
 	getRouteProfile,
 	getRouteRegistration,
+	getRouteSpecialist,
 } from "@/shared/consts/router";
 import { AppRouteProps } from "@/shared/types/router";
 import { UserRoles } from "@/entities/User";
@@ -15,13 +16,12 @@ import { RegistrationPage } from "@/pages/Registration";
 import { LazyProfiePage } from "@/pages/ProfilePage";
 import { LazyEventByIdPage } from "@/pages/EventByIdPage";
 import { LazyAdminPage } from "@/pages/AdminPage";
+import { LazySpecialistPage } from "@/pages/SpecialistPage";
 
 export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 	main: {
 		path: getRouteMain(),
 		element: <LazyMainPage />,
-		authOnly: true,
-		roles: [UserRoles.USER],
 	},
 	not_found: {
 		path: getRouteNotFound(),
@@ -39,7 +39,7 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 		roles: [UserRoles.USER],
 	},
 	event_by_id: {
-		path: getRouteEventById(),
+		path: getRouteEventById(":id"),
 		element: <LazyEventByIdPage />,
 		authOnly: true,
 		roles: [UserRoles.USER],
@@ -49,5 +49,11 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
 		element: <LazyAdminPage />,
 		authOnly: true,
 		roles: [UserRoles.ADMIN, UserRoles.MANAGER],
+	},
+	specialist: {
+		path: getRouteSpecialist(":id"),
+		element: <LazySpecialistPage />,
+		authOnly: true,
+		roles: [UserRoles.USER],
 	},
 };

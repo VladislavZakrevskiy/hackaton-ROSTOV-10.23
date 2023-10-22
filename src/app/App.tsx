@@ -6,6 +6,8 @@ import { Suspense, useEffect, useState } from "react";
 import { AppRouter } from "./providers/router";
 import { useGetMeQuery } from "@/entities/User/api/userApi";
 import { UserActions } from "@/entities/User";
+import { Navbar } from "@/widgets/Navbar";
+import { Footer } from "@/widgets/Footer";
 
 function App() {
 	const [inited, setInited] = useState(false);
@@ -26,7 +28,9 @@ function App() {
 
 	return (
 		<div className={cn("app", {}, [])}>
+			<Navbar />
 			<Suspense fallback={<PageLoader />}>{inited && <AppRouter />}</Suspense>
+			<Footer />
 		</div>
 	);
 }

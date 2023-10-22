@@ -1,94 +1,68 @@
-import {
-    AppBar,
-    Box,
-    InputBase,
-    Toolbar,
-    Typography,
-    alpha,
-    styled,
-} from '@mui/material'
-import { Search as SearchIcon } from '@mui/icons-material'
-
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(
-        theme.palette.common.white,
-        0.15
-    ),
-    '&:hover': {
-        backgroundColor: alpha(
-            theme.palette.common.white,
-            0.25
-        ),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-    },
-}))
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}))
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
-    },
-}))
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import logo from "@/shared/assets/svg/oggetto-logo_mono-flat-hor-rus.svg";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { CtrlK } from "@/widgets/CtrlK/CtrlK";
+import { getRouteAdmin, getRouteEvent, getRouteRegistration, getRouteSpecialist } from "@/shared/consts/router";
+import { useAppSelector } from "@/shared/lib/hooks/useAppSelector/useAppSelector";
+import { NotificationBadge } from "../../../entities/Notification/ui/NotificationBadge/NotificationBadge";
+import { UserRoles } from "@/entities/User";
 
 export const Navbar = () => {
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" color="transparent">
-                <Toolbar>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{
-                            flexGrow: 1,
-                            display: {
-                                xs: 'none',
-                                sm: 'block',
-                            },
-                        }}
-                    >
-                        MUI
-                    </Typography>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{
-                                'aria-label': 'search',
-                            }}
-                        />
-                    </Search>
-                </Toolbar>
-            </AppBar>
-        </Box>
-    )
-}
+	const nav = useNavigate();
+	const authData = useAppSelector((state) => state.user.authData);
+	const location = useLocation();
+
+	if (authData) {
+		return (
+			<Box sx={{ flexGrow: 1 }}>
+				<AppBar position="static" color="transparent">
+					<Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+						<img src={logo} alt="" style={{ width: "20%", cursor: "pointer" }} onClick={() => nav("/")} />
+
+						<Box display={"flex"} gap={2}>
+							<Link style={{ color: "black" }} to={getRouteEvent()}>
+								<Typography fontSize={20}>События</Typography>
+							</Link>
+							<Link style={{ color: "black" }} to={getRouteSpecialist()}>
+								<Typography fontSize={20}>Наши специалисты</Typography>
+							</Link>
+							{(authData.roles.includes(UserRoles.ADMIN) || authData.roles.includes(UserRoles.MANAGER)) && (
+								<Link style={{ color: "black" }} to={getRouteAdmin()}>
+									<Typography fontSize={20}>Админка</Typography>
+								</Link>
+							)}
+						</Box>
+						<Box display={"flex"} gap={2}>
+							<NotificationBadge />
+							<CtrlK />
+						</Box>
+					</Toolbar>
+				</AppBar>
+			</Box>
+		);
+	}
+
+	return (
+		<Box sx={{ flexGrow: 1 }}>
+			<AppBar position="static" color="transparent">
+				<Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+					<img src={logo} alt="" style={{ width: "20%", cursor: "pointer" }} onClick={() => nav("/")} />
+
+					<Box display={"flex"} gap={2}>
+						{location.pathname !== getRouteRegistration() && (
+							<Link style={{ color: "black" }} to={getRouteSpecialist()}>
+								<Button
+									onClick={() => nav(getRouteRegistration())}
+									variant="contained"
+									sx={{ fontSize: 20, p: "0.5rem 2rem" }}
+								>
+									Вход
+								</Button>
+							</Link>
+						)}
+					</Box>
+				</Toolbar>
+			</AppBar>
+		</Box>
+	);
+};

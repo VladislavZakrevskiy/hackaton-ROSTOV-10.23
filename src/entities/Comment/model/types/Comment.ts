@@ -1,3 +1,4 @@
+import { Event } from "@/entities/Event/model/types/Event"
 import { User } from "@/entities/User"
 
 export interface Comment {

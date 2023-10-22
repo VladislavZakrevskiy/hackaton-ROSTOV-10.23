@@ -1,2 +1,3 @@
+export { NotificationBadge } from './ui/NotificationBadge/NotificationBadge';
 export { Notification } from './ui/Notification/Notification';
-export { NotificationSchema } from './model/types/NotificationSchema';
+export type { NotificationSchema } from './model/types/NotificationSchema';

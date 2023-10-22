@@ -1,3 +1,4 @@
+import { Feedback } from "@/entities/Comment/model/types/Feedback";
 import { UserRoles } from "../consts/UserRoles";
 
 export interface User {
@@ -9,7 +10,7 @@ export interface User {
 	roles: string
 	comments?: Comment[]
 	notifications?: Notification[]
-	feedbacks?: FeedBack[]
+	feedbacks?: Feedback[]
 
 	created_at: string
 	updated_at: string
