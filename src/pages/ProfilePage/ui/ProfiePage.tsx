@@ -15,7 +15,6 @@ const ProfiePage = () => {
 		<Box>
 			<Box display="grid" sx={{ gridTemplateColumns: "40% 1fr" }}>
 				<Avatar src={user.image_url} alt={user.first_name + " " + user.last_name} sx={{ width: "40%" }} />
-				<Container>
 					<Typography>
 						{user.first_name} {user.last_name}
 					</Typography>
